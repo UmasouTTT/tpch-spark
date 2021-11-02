@@ -89,18 +89,19 @@ object TpchQuery {
     // read from hdfs
     // val INPUT_DIR: String = "/dbgen"
 
-    // val schemaProvider = new TpchSchemaProvider(sc, INPUT_DIR)
+     val schemaProvider = new TpchSchemaProvider(sc, INPUT_DIR)
 
-    val output = new ListBuffer[(String, Float)]
-    output ++= executeQueries(sc, queryNum， INPUT_DIR)
-
-    val outFile = new File("TIMES.txt")
-    val bw = new BufferedWriter(new FileWriter(outFile, true))
-
-    output.foreach {
-      case (key, value) => bw.write(f"${key}%s\t${value}%1.8f\n")
-    }
-
-    bw.close()
+    // Tripod
+//    val output = new ListBuffer[(String, Float)]
+//    output ++= executeQueries(sc, queryNum， INPUT_DIR)
+//
+//    val outFile = new File("TIMES.txt")
+//    val bw = new BufferedWriter(new FileWriter(outFile, true))
+//
+//    output.foreach {
+//      case (key, value) => bw.write(f"${key}%s\t${value}%1.8f\n")
+//    }
+//
+//    bw.close()
   }
 }
