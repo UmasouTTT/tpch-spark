@@ -42,7 +42,7 @@ object TpchQuery {
       df.write.mode("overwrite").format("com.databricks.spark.csv").option("header", "true").save(outputDir + "/" + className)
   }
 
-  def executeQueries(sc: SparkContext, schemaProvider: TpchSchemaProvider, queryNum: Int): ListBuffer[(String, Float)] = {
+  def executeQueries(sc: SparkContext, queryNum: Int, inputDir: String): ListBuffer[(String, Float)] = {
 
     // if set write results to hdfs, if null write to stdout
     // val OUTPUT_DIR: String = "/tpch"
@@ -62,7 +62,7 @@ object TpchQuery {
 
       val query = Class.forName(f"main.scala.Q${queryNo}%02d").newInstance.asInstanceOf[TpchQuery]
 
-      outputDF(query.execute(sc, schemaProvider), OUTPUT_DIR, query.getName())
+      outputDF(query.execute(sc, schemaProvider, inputDir: String), OUTPUT_DIR, query.getName())
 
       val t1 = System.nanoTime()
 
@@ -89,10 +89,10 @@ object TpchQuery {
     // read from hdfs
     // val INPUT_DIR: String = "/dbgen"
 
-    val schemaProvider = new TpchSchemaProvider(sc, INPUT_DIR)
+    // val schemaProvider = new TpchSchemaProvider(sc, INPUT_DIR)
 
     val output = new ListBuffer[(String, Float)]
-    output ++= executeQueries(sc, schemaProvider, queryNum)
+    output ++= executeQueries(sc, queryNum， INPUT_DIR)
 
     val outFile = new File("TIMES.txt")
     val bw = new BufferedWriter(new FileWriter(outFile, true))
