@@ -28,7 +28,7 @@ abstract class TpchQuery {
   /**
    *  implemented in children classes and hold the actual query
    */
-  def execute(sc: SparkContext, tpchSchemaProvider: TpchSchemaProvider): DataFrame
+  def execute(sc: SparkContext, inputDir: String): DataFrame
 }
 
 object TpchQuery {
