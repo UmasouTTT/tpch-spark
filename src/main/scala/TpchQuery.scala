@@ -95,6 +95,7 @@ object TpchQuery {
 
      val t1 = System.nanoTime()
 
+     val elapsed = (t1 - t0) / 1000000000.0f // second
      results += new Tuple2("Init", elapsed)
 
     // Tripod
