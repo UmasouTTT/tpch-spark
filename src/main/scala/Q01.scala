@@ -37,7 +37,7 @@ class Q01 extends TpchQuery {
     // this is used to implicitly convert an RDD to a DataFrame.
     val sqlContext = new org.apache.spark.sql.SQLContext(sc)
     import sqlContext.implicits._
-    import schemaProvider._
+    // import schemaProvider._
 
     val decrease = udf { (x: Double, y: Double) => x * (1 - y) }
     val increase = udf { (x: Double, y: Double) => x * (1 + y) }

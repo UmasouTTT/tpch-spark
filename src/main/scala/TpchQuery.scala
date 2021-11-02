@@ -62,7 +62,7 @@ object TpchQuery {
 
       val query = Class.forName(f"main.scala.Q${queryNo}%02d").newInstance.asInstanceOf[TpchQuery]
 
-      outputDF(query.execute(sc, schemaProvider, inputDir: String), OUTPUT_DIR, query.getName())
+      outputDF(query.execute(sc, inputDir: String), OUTPUT_DIR, query.getName())
 
       val t1 = System.nanoTime()
 
@@ -88,6 +88,8 @@ object TpchQuery {
 
     // read from hdfs
     // val INPUT_DIR: String = "/dbgen"
+
+    val results = new ListBuffer[(String, Float)]
 
      val t0 = System.nanoTime()
 
